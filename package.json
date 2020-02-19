@@ -1,0 +1,22 @@
+{
+  "name": "nacho-odm",
+  "version": "1.0.0",
+  "description": "typescript couchdb odm",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "couchdb",
+    "typescript",
+    "odm",
+    "nacho",
+    "nacho-odm"
+  ],
+  "author": "apapacy@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@types/nano": "^7.0.0",
+    "nano": "^8.1.0"
+  }
+}
