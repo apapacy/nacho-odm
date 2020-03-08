@@ -13,7 +13,7 @@ export class Database {
     console.log(created)
   }
   use(name: string) {
-    return this.conn.use(name);
+    this.db = this.conn.use(name);
   }
   insert(...params: any[]) {
     return this.db.insert(...params);

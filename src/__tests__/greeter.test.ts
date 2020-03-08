@@ -1,5 +1,6 @@
 import { greeter } from '../index';
 import {Database} from '../Database'
+import {Author} from './Author';
 
 const conn = {
   host: '127.0.0.1',
@@ -15,5 +16,23 @@ test('My Greeter', () => {
 });
 
 test('create database', () => {
-  return  db.use('test').insert({a: 11});
+  db.use('test')
+  return  db.insert({a: 11});
+});
+
+test('create Author', () => {
+  const author = new Author({
+    name: 'Joe',
+    address: {
+      city: 'Ach',
+      street: 'King Road',
+      house: '12b',
+    }
+  })
+  author.name = 'John'
+  console.log(author.getData())
+  console.log(JSON.stringify(author))
+  for (let key in author) {
+    console.log(key, author[key.toString()])
+  }
 });
