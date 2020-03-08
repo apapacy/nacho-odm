@@ -29,10 +29,7 @@ test('create Author', () => {
       house: '12b',
     }
   })
-  author.name = 'John'
+  author.name = 12
   console.log(author.getData())
   console.log(JSON.stringify(author))
-  for (let key in author) {
-    console.log(key, author[key.toString()])
-  }
 });

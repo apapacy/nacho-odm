@@ -1,5 +1,5 @@
 import {Model as Model} from '../Model';
-import {property} from '../decorators';
+import {enumerable, property, writable} from '../decorators';
 
 interface AddressType {
     city: string,
@@ -16,7 +16,12 @@ interface AuthorType {
 
 export class Author extends Model<AuthorType> {
     @property()
-    public name?: string;
+    public name?: number;
+
+    @enumerable(false)
+    public get Name(): string {
+        return this.getData().name + '***'
+    }
 }
 
 test('class log', () => {
