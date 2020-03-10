@@ -1,13 +1,12 @@
+import 'reflect-metadata';
+
+const meta = 'nacho:property';
+
 export function property() {
-    return (target: any, propertyKey: string | symbol): void => {
-        Object.defineProperty(target, propertyKey, {
-          get() { return this.__data__[propertyKey];},
-          set(value) {
-            this.__data__[propertyKey] = value;
-            console.log(target)
-          },
-          enumerable: true,
-          configurable: true,
-        });    
+    return (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor): void => {
+      Reflect.defineMetadata(meta, true, target, propertyKey);
+      if (descriptor) {
+          descriptor.enumerable = true;
+      }
     }
 }

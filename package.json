@@ -24,7 +24,8 @@
   "license": "MIT",
   "dependencies": {
     "@types/nano": "^7.0.0",
-    "nano": "^8.1.0"
+    "nano": "^8.1.0",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/jest": "^25.1.2",

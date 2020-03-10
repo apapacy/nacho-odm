@@ -18,8 +18,12 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     @property()
     public name: string;
 
-    @enumerable(false)
+    @property()
     public get Name(): string {
+        return this.getData().name + '***'
+    };
+
+    public get Name1(): string {
         return this.getData().name + '***'
     };
 

@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {enumerable} from './decorators'
 
 export class Model<IType> {
@@ -19,21 +20,15 @@ export class Model<IType> {
     }
 
     public toJSON(): any {
+        const meta = 'nacho:property';
         const proto = Object.getPrototypeOf(this);
-        const jsonObj: any = Object.assign({}, this);
-      
-        Object.entries(Object.getOwnPropertyDescriptors(proto))
-          .filter(([key, descriptor]) => typeof descriptor.get === 'function')
-          .map(([key, descriptor]) => {
-            if (descriptor && key[0] !== '_') {
-              try {
-                const val = (this as any)[key];
-                jsonObj[key] = val;
-              } catch (error) {
-                console.error(`Error calling getter ${key}`, error);
-              }
+        const jsonObj: any = {};
+        for (let name in this) {
+            console.log(name)
+            if (Reflect.getMetadata(meta, proto, name)) {
+                jsonObj[name] = (this as any)[name];
             }
-          });
-      
-        return jsonObj;    }
+        };
+        return jsonObj;
+    }
 }

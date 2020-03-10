@@ -29,7 +29,7 @@ test('create Author', () => {
       house: '12b',
     }
   })
-  author.name = 12
-  console.log(author.getData())
-  console.log(JSON.stringify(author))
+  //author.name = 12
+  //console.log(author.getData())
+  console.log('****************', JSON.stringify(author))
 });
