@@ -27,6 +27,7 @@ export class Author extends Model<AuthorType> implements AuthorType  {
         return this.getData().name + '***'
     };
 
+    @property()
     public address: Address
 
     constructor(author: AuthorType) {
@@ -40,6 +41,7 @@ export class Author extends Model<AuthorType> implements AuthorType  {
 export class Address extends Model<AddressType> implements AddressType {
     public city: string;
     public street: string;
+    @property()
     public house: string;
     public appartment?: number;
 

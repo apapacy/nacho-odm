@@ -26,7 +26,11 @@ export class Model<IType> {
         for (let name in this) {
             console.log(name)
             if (Reflect.getMetadata(meta, proto, name)) {
-                jsonObj[name] = (this as any)[name];
+                if (typeof (this as any)[name] === 'object') {
+                    jsonObj[name] = (this as any)[name].toJSON();
+                } else {
+                    jsonObj[name] = (this as any)[name];
+                }
             }
         };
         return jsonObj;
