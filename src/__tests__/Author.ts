@@ -14,13 +14,39 @@ interface AuthorType {
     address: AddressType,
 }
 
-export class Author extends Model<AuthorType> {
+export class Author extends Model<AuthorType> implements AuthorType  {
     @property()
-    public name?: number;
+    public name: string;
 
     @enumerable(false)
     public get Name(): string {
         return this.getData().name + '***'
+    };
+
+    public address: Address
+
+    constructor(author: AuthorType) {
+        super(author);
+        this.name = author.name;
+        this.address = new Address(author.address)
+    }
+}
+
+
+export class Address extends Model<AddressType> implements AddressType {
+    public city: string;
+    public street: string;
+    public house: string;
+    public appartment?: number;
+
+    constructor(address: AddressType) {
+        super(address);
+        ({
+            city: this.city,
+            street: this.street,
+            house: this.house,
+            appartment: this.appartment
+         } = address)
     }
 }
 
