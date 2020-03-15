@@ -1,5 +1,5 @@
 import {Model as Model} from '../Model';
-import {enumerable, property, writable} from '../decorators';
+import {enumerable, property, writable, _type} from '../decorators';
 
 interface AddressType {
     city: string,
@@ -32,7 +32,7 @@ export class Address extends Model<AddressType> implements AddressType {
 
 }
 
-
+@_type('author')
 export class Author extends Model<AuthorType> implements AuthorType  {
 
     constructor(data: AuthorType) {
