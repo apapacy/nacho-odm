@@ -1,6 +1,6 @@
 import { greeter } from '../index';
 import {Database} from '../Database'
-import {Author} from './Author';
+import {Author, Address} from './Author';
 
 const conn = {
   host: '127.0.0.1',
@@ -21,9 +21,10 @@ test('create database', () => {
 });
 
 test('create Author', () => {
-  const author = new Author({
+  const author = new Author(<Author>{
+    _id: "1234567890",
     name: 'Joe',
-    address: {
+    address: <Address>{
       city: 'Ach',
       street: 'King Road',
       house: '12b',

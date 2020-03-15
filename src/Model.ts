@@ -1,12 +1,21 @@
 import 'reflect-metadata';
-import { enumerable } from './decorators';
+import { enumerable, property } from './decorators';
 
 export class Model<IType> {
-    protected __DATA__: IType;
 
-    constructor(data: IType) {
-        this.__DATA__ = data;
-    }
+    @property()
+    public _type: string|undefined;
+
+    @property()
+    public _id: string|undefined;
+
+    @property()
+    public _rev: string|undefined;
+
+    constructor(data: any) {
+      this._id = data._id;
+    };
+
 
     public toJSON(): any {
         const meta = 'nacho:property';
@@ -24,13 +33,4 @@ export class Model<IType> {
         return jsonObj;
     }
 
-    @enumerable(false)
-    protected getData(): IType {
-        return this.__DATA__;
-    }
-
-    @enumerable(false)
-    protected setData(data: IType) {
-        this.__DATA__ = data;
-    }
 }

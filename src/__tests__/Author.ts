@@ -14,47 +14,51 @@ interface AuthorType {
     address: AddressType,
 }
 
-export class Author extends Model<AuthorType> implements AuthorType  {
-    @property()
-    public name: string;
-
-    @property()
-    public get Name(): string {
-        return this.getData().name + '***'
-    };
-
-    public get Name1(): string {
-        return this.getData().name + '***'
-    };
-
-    @property()
-    public address: Address
-
-    constructor(author: AuthorType) {
-        super(author);
-        this.name = author.name;
-        this.address = new Address(author.address)
-    }
-}
-
-
 export class Address extends Model<AddressType> implements AddressType {
+
+    constructor(data: AddressType) {
+      super(data);
+      this.city = data.city;
+      this.street = data.street;
+      this.house = data.house;
+      this.appartment = data.appartment;
+    };
+
     public city: string;
     public street: string;
     @property()
     public house: string;
     public appartment?: number;
 
-    constructor(address: AddressType) {
-        super(address);
-        ({
-            city: this.city,
-            street: this.street,
-            house: this.house,
-            appartment: this.appartment
-         } = address)
-    }
 }
+
+
+export class Author extends Model<AuthorType> implements AuthorType  {
+
+    constructor(data: AuthorType) {
+      super(data);
+      this.name = data.name;
+      this.address = new Address(data.address);
+    };
+
+    @property()
+    public name: string;
+
+    @property()
+    public get Name(): string {
+        return this.name + '***'
+    };
+
+    public get Name1(): string {
+        return this.name + '***'
+    };
+
+    @property()
+    public address: Address
+
+}
+
+
 
 test('class log', () => {
     console.log(Author)
