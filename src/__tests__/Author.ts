@@ -16,18 +16,10 @@ interface AuthorType {
 
 export class Address extends Model<AddressType> implements AddressType {
 
-    constructor(data: AddressType) {
-      super(data);
-      this.city = data.city;
-      this.street = data.street;
-      this.house = data.house;
-      this.appartment = data.appartment;
-    };
-
-    public city: string;
-    public street: string;
+    public city!: string;
+    public street!: string;
     @property()
-    public house: string;
+    public house!: string;
     public appartment?: number;
 
 }
@@ -35,16 +27,9 @@ export class Address extends Model<AddressType> implements AddressType {
 @_type('author')
 export class Author extends Model<AuthorType> implements AuthorType  {
 
-    constructor(data: AuthorType) {
-      super(data);
-      this.name = data.name;
-      this.address = new Address(data.address);
-    };
-
     @property()
-    public name: string;
+    public name!: string;
 
-    @property()
     public get Name(): string {
         return this.name + '***'
     };
@@ -53,8 +38,8 @@ export class Author extends Model<AuthorType> implements AuthorType  {
         return this.name + '***'
     };
 
-    @property()
-    public address: Address
+    @property(Address)
+    public address!: Address
 
 }
 
