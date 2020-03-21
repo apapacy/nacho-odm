@@ -9,11 +9,14 @@ export class Descriptor {
 }
 
 export function setDescriptor(target: any, propertyKey: string | symbol, key: string, value: any) {
-    let descriptors:any;
-    if (Reflect.hasOwnMetadata(meta, target)) {
-        descriptors = Reflect.getMetadata(meta, target);
-    } else {
-        descriptors = {};
+    let descriptors = Reflect.getOwnMetadata(meta, target);
+    if (!descriptors) {
+        const parentDescriptors = Reflect.getMetadata(meta, target);
+        if (parentDescriptors) {
+            descriptors = Object.assign({}, parentDescriptors);
+        } else {
+            descriptors = {};
+        }
     }
     if (!descriptors[propertyKey]) {
         descriptors[propertyKey] = new Descriptor();

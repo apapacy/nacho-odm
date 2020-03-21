@@ -17,6 +17,8 @@ export class Model<IType> {
       this._id = data._id;
       const proto = Object.getPrototypeOf(this);
       const descriptors = getDescriptors(proto);
+      console.log(proto);
+      console.log(descriptors);
       for (const name in descriptors) {
           const descriptor = descriptors[name] as Descriptor;
           if (descriptor.property)  {
