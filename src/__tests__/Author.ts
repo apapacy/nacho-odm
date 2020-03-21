@@ -1,5 +1,5 @@
 import {Model as Model} from '../Model';
-import {enumerable, property, writable, _type} from '../decorators';
+import {enumerable, property, writable, _type, getDescriptors} from '../decorators';
 
 interface AddressType {
     city: string,
@@ -48,3 +48,4 @@ export class Author extends Model<AuthorType> implements AuthorType  {
 test('class log', () => {
     console.log(Author)
 });
+
