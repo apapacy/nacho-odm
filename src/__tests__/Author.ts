@@ -1,5 +1,5 @@
 import {Model as Model} from '../Model';
-import {enumerable, property, writable, _type, getDescriptors} from '../decorators';
+import {optional, property, writable, _type, getDescriptors} from '../decorators';
 
 interface AddressType {
     city: string,
@@ -20,6 +20,8 @@ export class Address extends Model<AddressType> implements AddressType {
     public street!: string;
     @property()
     public house!: string;
+    @property()
+    @optional()
     public appartment?: number;
 
 }

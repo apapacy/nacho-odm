@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-const meta = 'nacho:desriptors';
+const meta = Symbol('nacho:desriptors');
 
 export class Descriptor {
     public property?: boolean;
@@ -23,7 +23,6 @@ export function setDescriptor(target: any, propertyKey: string | symbol, key: st
     }
     descriptors[propertyKey][key] = value;
     Reflect.defineMetadata(meta, descriptors, target)
-    console.log(meta, descriptors, target)
 }
 
 export function getDescriptor(target: any, propertyKey: string | symbol): Descriptor  {
@@ -31,5 +30,6 @@ export function getDescriptor(target: any, propertyKey: string | symbol): Descri
 }
 
 export function getDescriptors(target: any): any  {
+    console.log( Reflect.getMetadataKeys(target))
     return Reflect.getMetadata(meta, target);
 }
