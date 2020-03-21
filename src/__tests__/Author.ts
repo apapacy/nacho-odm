@@ -19,9 +19,11 @@ export class Address extends Model<AddressType> implements AddressType {
     public city!: string;
     public street!: string;
     @property()
+    @group('cat')
     public house!: string;
     @property()
     @optional()
+    @group('cat')
     public appartment?: number;
 
 }
@@ -42,6 +44,7 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     };
 
     @property(Address)
+    @group('dog')
     public address!: Address
 
 }

@@ -59,7 +59,10 @@ export class Model<IType> {
         const descriptors = getDescriptors(proto);
         const jsonObj: any = {};
         for (const name in descriptors) {
+            console.log(name)
             const descriptor = descriptors[name] as Descriptor;
+            console.log(descriptor)
+            console.log(typeof (this as any)[name])
             if (descriptor?.groups?.some(item => groups?.indexOf(item) > -1)) {
                 if (typeof (this as any)[name] === 'object') {
                     jsonObj[name] = (this as any)[name].group(...groups);

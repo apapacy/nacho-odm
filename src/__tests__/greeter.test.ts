@@ -28,10 +28,11 @@ test('create Author', () => {
       city: 'Ach',
       street: 'King Road',
       house: '12b',
+      appartment: 45,
     }
   })
   //author.name = 12
   //console.log(author.getData())
   console.log('****************', JSON.stringify(author))
-  console.log('----------------', author.group('cat', 'default'))
+  console.log('----------------', author.group('cat', 'default', 'dog'))
 });
