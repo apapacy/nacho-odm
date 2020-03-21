@@ -4,3 +4,4 @@ export * from './enumerable';
 export * from './writable';
 export * from './property';
 export * from './optional';
+export * from './group';

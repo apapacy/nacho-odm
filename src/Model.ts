@@ -22,7 +22,7 @@ export class Model<IType> {
       const descriptors = getDescriptors(proto);
       for (const name in descriptors) {
           const descriptor = descriptors[name] as Descriptor;
-          if (descriptor.required && typeof((data as any)[name]) === 'undefined') {
+          if (descriptor.required && descriptor.property && typeof((data as any)[name]) === 'undefined') {
               throw new Error(`${this.constructor}[${name}] is requierd`);
           }
           if (descriptor.property)  {
@@ -40,7 +40,7 @@ export class Model<IType> {
     public toJSON(): any {
         const proto = Object.getPrototypeOf(this);
         const descriptors = getDescriptors(proto);
-          const jsonObj: any = {};
+        const jsonObj: any = {};
         for (const name in descriptors) {
             const descriptor = descriptors[name] as Descriptor;
             if (descriptor.property) {
@@ -52,6 +52,23 @@ export class Model<IType> {
             }
         }
         return jsonObj;
+    }
+
+    public group(...groups: string[]) {
+        const proto = Object.getPrototypeOf(this);
+        const descriptors = getDescriptors(proto);
+        const jsonObj: any = {};
+        for (const name in descriptors) {
+            const descriptor = descriptors[name] as Descriptor;
+            if (descriptor?.groups?.some(item => groups?.indexOf(item) > -1)) {
+                if (typeof (this as any)[name] === 'object') {
+                    jsonObj[name] = (this as any)[name].group(...groups);
+                } else {
+                    jsonObj[name] = (this as any)[name];
+                }
+            }
+        }
+        return jsonObj;        
     }
 
 }

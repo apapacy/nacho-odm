@@ -1,5 +1,5 @@
 import {Model as Model} from '../Model';
-import {optional, property, writable, _type, getDescriptors} from '../decorators';
+import {optional, property, group, _type, getDescriptors} from '../decorators';
 
 interface AddressType {
     city: string,
@@ -35,7 +35,8 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     public get Name(): string {
         return this.name + '***'
     };
-
+    
+    @group('dog', 'cat')
     public get Name1(): string {
         return this.name + '***'
     };

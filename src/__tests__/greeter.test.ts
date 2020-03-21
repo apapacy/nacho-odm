@@ -33,4 +33,5 @@ test('create Author', () => {
   //author.name = 12
   //console.log(author.getData())
   console.log('****************', JSON.stringify(author))
+  console.log('----------------', author.group('cat', 'default'))
 });
