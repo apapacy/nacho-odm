@@ -2,7 +2,13 @@ import * as ts from 'typescript';
 import 'reflect-metadata';
 import { optional, property, Descriptor, getDescriptors } from './decorators';
 
-export class Model<IType> {
+export interface ModelType {
+    _type?: string,
+    _id?: string,
+    _rev?: string
+}
+
+export class Model<Type extends ModelType> implements ModelType {
 
     @property()
     @optional()
@@ -16,7 +22,7 @@ export class Model<IType> {
     @optional()
     public _rev: string|undefined;
 
-    constructor(data: any) {
+    constructor(data: Type) {
       this._id = data._id;
       const proto = Object.getPrototypeOf(this);
       const descriptors = getDescriptors(proto);

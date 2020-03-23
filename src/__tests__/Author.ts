@@ -1,14 +1,14 @@
-import {Model as Model} from '../Model';
+import {Model, ModelType} from '../Model';
 import {optional, property, group, _type, getDescriptors} from '../decorators';
 
-interface AddressType {
+interface AddressType extends ModelType {
     city: string,
     street: string,
     house: string,
     appartment?: number,
 }
 
-interface AuthorType {
+interface AuthorType extends ModelType{
     _id?: string,
     name: string,
     address: AddressType,
