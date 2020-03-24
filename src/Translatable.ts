@@ -3,20 +3,15 @@ import { enumerable, property } from './decorators';
 
 export interface TranslatableType {
   en?: string,
-  ru?: string,
-  uk?: string
+  toJSON?: any
 }
 
 export class Translatable implements TranslatableType{
 
     public en?: string;
-    public ru?: string;
-    public uk?: string;
 
-    constructor({ ru, en, uk }: TranslatableType) {
-      this.ru = ru;
+    constructor({ en }: TranslatableType) {
       this.en = en;
-      this.uk = uk;
     }
 
 

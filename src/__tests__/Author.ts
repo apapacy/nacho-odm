@@ -1,6 +1,6 @@
 import {Model, ModelType} from '../Model';
 import {optional, property, group, _type, translatable} from '../decorators';
-import {Translatable} from '../Translatable'
+import {Translatable, TranslatableType} from '../Translatable'
 interface AddressType extends ModelType {
     city: string,
     street: Translatable,
@@ -43,12 +43,12 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     
     @translatable()
     @group('dog', 'cat')
-    public get Name1(): Translatable {
+    public get Name1(): TranslatableType {
         return {
             ru: this.name + '*** ru',
             en: this.name + '*** en',
             uk: this.name + '*** uk',
-        } as Translatable;
+        } as TranslatableType;
     };
 
     @property(Address)
