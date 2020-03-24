@@ -8,12 +8,11 @@ export interface TranslatableType {
 
 export class Translatable implements TranslatableType{
 
-    public en?: string;
+    public en!: string;
 
-    constructor({ en }: TranslatableType) {
-      this.en = en;
+    constructor(translations: TranslatableType) {
+        Object.assign(this, translations);
     }
-
 
     toJSON() {
         return Object.assign({}, this);
