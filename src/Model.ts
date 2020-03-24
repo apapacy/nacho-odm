@@ -48,7 +48,10 @@ export class Model<Type extends ModelType> implements ModelType {
         const descriptors = getDescriptors(proto);
         const jsonObj: any = {};
         for (const name in descriptors) {
+            console.log(name);
+            console.log((this as any)[name]);
             const descriptor = descriptors[name] as Descriptor;
+            console.log(descriptor)
             if (descriptor.property) {
                 if (typeof (this as any)[name] === 'object') {
                     jsonObj[name] = (this as any)[name].toJSON();
@@ -60,18 +63,23 @@ export class Model<Type extends ModelType> implements ModelType {
         return jsonObj;
     }
 
-    public group(...groups: string[]) {
+    public group(groups: string[], locale?: string) {
         const proto = Object.getPrototypeOf(this);
         const descriptors = getDescriptors(proto);
         const jsonObj: any = {};
         for (const name in descriptors) {
-            console.log(name)
             const descriptor = descriptors[name] as Descriptor;
-            console.log(descriptor)
-            console.log(typeof (this as any)[name])
             if (descriptor?.groups?.some(item => groups?.indexOf(item) > -1)) {
                 if (typeof (this as any)[name] === 'object') {
-                    jsonObj[name] = (this as any)[name].group(...groups);
+                    if (descriptor.translatable) {
+                        if (locale) {
+                            jsonObj[name] = (this as any)[name][locale];
+                        } else {
+                            jsonObj[name] = Object.assign((this as any)[name]);
+                        }
+                    } else {
+                        jsonObj[name] = (this as any)[name].group(groups, locale);
+                    }
                 } else {
                     jsonObj[name] = (this as any)[name];
                 }

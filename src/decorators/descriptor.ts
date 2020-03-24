@@ -7,6 +7,7 @@ export class Descriptor {
     public required = true;
     public type?: new (...args: any[]) => void;
     public groups?: string[];
+    public translatable = false;
 }
 
 export function setDescriptor(target: any, propertyKey: string | symbol, key: string, value: any) {

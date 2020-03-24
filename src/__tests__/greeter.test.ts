@@ -26,7 +26,11 @@ test('create Author', () => {
     name: 'Joe',
     address: <Address>{
       city: 'Ach',
-      street: 'King Road',
+      street: {
+        en: 'King Road',
+        ru: 'King Road',
+        uk: 'King Road',
+      },
       house: '12b',
       appartment: 45,
     }
@@ -34,5 +38,5 @@ test('create Author', () => {
   //author.name = 12
   //console.log(author.getData())
   console.log('****************', JSON.stringify(author))
-  console.log('----------------', author.group('cat', 'default', 'dog'))
+  console.log('----------------', author.group(['cat', 'default', 'dog'], 'uk'))
 });
