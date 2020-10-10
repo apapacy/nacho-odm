@@ -6,3 +6,4 @@ export * from './property';
 export * from './optional';
 export * from './group';
 export * from './translatable';
+export * from './model';

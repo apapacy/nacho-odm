@@ -23,8 +23,7 @@
   "author": "apapacy@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "@types/nano": "^7.0.0",
-    "nano": "^8.1.0",
+    "arangojs": "^7.0.2",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {

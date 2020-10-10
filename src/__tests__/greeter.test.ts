@@ -1,26 +1,14 @@
 import { greeter } from '../index';
-import {Database} from '../Database'
-import {Author, Address} from './Author';
+import {Author, Address} from '../test/author';
+import { Reposytory } from '../test/reposytory';
 
-const conn = {
-  host: '127.0.0.1',
-  port: 5984,
-  user: 'admin',
-  password: 'password'
-}
-
-const db = new Database(conn)
+const db = new Reposytory();
 
 test('My Greeter', () => {
   expect(greeter('Carl')).toBe('Hello Carl');
 });
 
-test('create database', () => {
-  db.use('test')
-  return  db.insert({a: 11});
-});
-
-test('create Author', () => {
+test('create Author', async () => {
   const author = new Author(<Author>{
     _id: "1234567890",
     name: 'Joe',
@@ -37,6 +25,6 @@ test('create Author', () => {
   })
   //author.name = 12
   //console.log(author.getData())
-  console.log('****************', JSON.stringify(author))
-  console.log('----------------', author.group(['cat', 'default', 'dog'], 'en'))
+  const doc: Author =  await db.authorCreate(author);
+  console.log('222222222222222222222', new Author(doc).group(['cat'], 'uk'))
 });

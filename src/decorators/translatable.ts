@@ -1,5 +1,5 @@
 import { setDescriptor } from './descriptor';
-import { Translatable } from '../Translatable';
+import { Translatable } from '../translatable';
 
 export function translatable(Type?: Function) {
   return (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor): void => {

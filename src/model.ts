@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { optional, property, Descriptor, getDescriptors } from './decorators';
 
 export interface ModelType {
-    _type?: string,
+    _key?: string,
     _id?: string,
     _rev?: string
 }
@@ -85,7 +85,7 @@ export class Model<Type extends ModelType> implements ModelType {
                 }
             }
         }
-        return jsonObj;        
+        return jsonObj;
     }
 
 }

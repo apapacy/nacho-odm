@@ -1,6 +1,6 @@
-import {Model, ModelType} from '../Model';
+import {Model, ModelType} from '../model';
 import {optional, property, group, _type, translatable} from '../decorators';
-import {Translatable, TranslatableType} from '../Translatable'
+import {Translatable, TranslatableType} from '../translatable'
 interface AddressType extends ModelType {
     city: string,
     street: Translatable,
@@ -9,7 +9,6 @@ interface AddressType extends ModelType {
 }
 
 interface AuthorType extends ModelType{
-    _id?: string,
     name: string,
     address: AddressType,
 }
@@ -31,7 +30,6 @@ export class Address extends Model<AddressType> implements AddressType {
 
 }
 
-@_type('author')
 export class Author extends Model<AuthorType> implements AuthorType  {
 
     @property()
@@ -40,7 +38,7 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     public get Name(): string {
         return this.name + '***'
     };
-    
+
     @translatable()
     @group('dog', 'cat')
     public get Name1(): TranslatableType {
@@ -62,4 +60,3 @@ export class Author extends Model<AuthorType> implements AuthorType  {
 test('class log', () => {
     console.log(Author)
 });
-

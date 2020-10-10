@@ -1,0 +1,150 @@
+version: '3'
+services:
+  agency:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/agency/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --agency.my-address tcp://agency:8529
+        --agency.size 3
+        --agency.activate true
+        --database.directory /var/lib/arangodb3
+
+  agency2:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/agency2/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --agency.my-address tcp://agency2:8529
+        --agency.size 3
+        --agency.activate true
+        --database.directory /var/lib/arangodb3
+
+  agency3:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/agency3/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --agency.my-address tcp://agency3:8529
+        --agency.size 3
+        --agency.endpoint tcp://agency:8529
+        --agency.endpoint tcp://agency2:8529
+        --agency.endpoint tcp://agency3:8529
+        --agency.activate true
+        --database.directory /var/lib/arangodb3
+
+  coordinator:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/coordinator/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --cluster.my-address tcp://coordinator:8529
+        --cluster.my-local-info coord1
+        --cluster.my-role COORDINATOR
+        --cluster.agency-endpoint tcp://agency:8529
+        --cluster.agency-endpoint tcp://agency2:8529
+        --cluster.agency-endpoint tcp://agency3:8529
+        --database.directory /var/lib/arangodb3
+      ports: ['8000:8529']
+
+  coordinator1:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/coordinator1/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --cluster.my-address tcp://coordinator1:8529
+        --cluster.my-local-info coord2
+        --cluster.my-role COORDINATOR
+        --cluster.agency-endpoint tcp://agency:8529
+        --cluster.agency-endpoint tcp://agency2:8529
+        --cluster.agency-endpoint tcp://agency3:8529
+        --database.directory /var/lib/arangodb3
+      ports: ['8001:8529']
+
+  coordinator2:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/coordinator2/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --cluster.my-address tcp://coordinator2:8529
+        --cluster.my-local-info coord3
+        --cluster.my-role COORDINATOR
+        --cluster.agency-endpoint tcp://agency:8529
+        --cluster.agency-endpoint tcp://agency2:8529
+        --cluster.agency-endpoint tcp://agency3:8529
+        --database.directory /var/lib/arangodb3
+      ports: ['8002:8529']
+
+  db1:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/db1/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --cluster.my-address tcp://db1:8529
+        --cluster.my-local-info db1
+        --cluster.my-role PRIMARY
+        --cluster.agency-endpoint tcp://agency:8529
+        --cluster.agency-endpoint tcp://agency2:8529
+        --cluster.agency-endpoint tcp://agency3:8529
+        --database.directory /var/lib/arangodb3
+
+  db2:
+      image: arangodb:latest
+      environment:
+          ARANGO_ROOT_PASSWORD: password
+          ROOT_PASSWORD: password
+      volumes:
+          - ./arango.jwt:/tmp/arango.jwt
+          - ./arangodb/db2/:/var/lib/arangodb3/
+      command: arangod
+        --server.jwt-secret=/tmp/arango.jwt
+        --server.endpoint tcp://0.0.0.0:8529
+        --cluster.my-address tcp://db2:8529
+        --cluster.my-local-info db2
+        --cluster.my-role PRIMARY
+        --cluster.agency-endpoint tcp://agency:8529
+        --cluster.agency-endpoint tcp://agency2:8529
+        --cluster.agency-endpoint tcp://agency3:8529
+        --database.directory /var/lib/arangodb3
