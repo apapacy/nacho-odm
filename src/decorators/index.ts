@@ -7,3 +7,4 @@ export * from './optional';
 export * from './group';
 export * from './translatable';
 export * from './model';
+export * from './collection';

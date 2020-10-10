@@ -1,7 +1,7 @@
 import { Database } from 'arangojs';
 import { db } from './database';
 import { Author } from './author';
-import { model } from '../decorators';
+import { model, collection } from '../decorators';
 
 
 export class Reposytory {
@@ -12,9 +12,10 @@ export class Reposytory {
     this.db = db;
   }
 
-  async findAll() {
+  @collection<Author>(Author)
+  async authorFindAll() {
     const row = await this.db.query({
-      query: 'FOR row IN authors RETURN row',
+      query: 'for row in authors return row',
       bindVars: {},
     });
     return row.all();
