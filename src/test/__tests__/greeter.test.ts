@@ -30,9 +30,10 @@ test('create Author', async () => {
     }]
   })
   //author.name = 12
-  //console.log(author.getData())
+  console.log(author)
+  console.log(author.toJSON())
   const doc: Author =  await db.authorCreate(author);
-  console.log(doc);
+  //console.log(doc);
   //const arr: Array<Author> =  await db.authorFindAll();
   //console.log('222222222222222222222', arr)
   //console.log('222222222222222222222', doc.get(['cat', 'dog']))
