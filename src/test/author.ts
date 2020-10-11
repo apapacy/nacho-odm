@@ -58,8 +58,8 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     @attr()
     @optional()
     @getter()
-    public get addressId(): string {
-      return this.address.street.en;
+    public get addressId(): string|undefined {
+      return this.address._key;
     }
 
     @attr(Address)
@@ -70,9 +70,3 @@ export class Author extends Model<AuthorType> implements AuthorType  {
 
 
 }
-
-
-
-test('class log', () => {
-    console.log(Author)
-});

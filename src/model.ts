@@ -47,7 +47,7 @@ export class Model<Type extends ModelType> implements ModelType {
                   if (descriptor.array) {
                     (this as any)[name] = new Array();
                     if ((data as any)[name]) {
-                      (data as any)[name].forEach((item: any) => (this as any)[name].push(new (descriptor.type || Object)(item)));
+                      (data as any)[name].forEach((item: any) => ((this as any)[name]).push(new (descriptor.type || Object)(item)));
                     }
                   } else {
                       (this as any)[name] = new descriptor.type((data as any)[name]);
@@ -71,12 +71,13 @@ export class Model<Type extends ModelType> implements ModelType {
         const jsonObj: any = {};
         for (const name in descriptors) {
             const descriptor = descriptors[name] as Descriptor;
-            if (descriptor.array) {
+            if (descriptor.attr && descriptor.array) {
+                jsonObj[name] = [];
                 (this as any)[name].forEach((item: any) => {
                   if (typeof (item as any)[name] === 'object') {
-                      jsonObj[name] = (item as any)[name].toJSON();
+                      jsonObj[name].push(item.toJSON());
                   } else {
-                      jsonObj[name] = (item as any)[name];
+                      jsonObj[name].push(item);
                   }
                 });
             } else if (descriptor.attr) {
