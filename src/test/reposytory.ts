@@ -12,7 +12,7 @@ export class Reposytory {
     this.db = db;
   }
 
-  @collection<Author>(Author)
+  @collection(Author)
   async authorFindAll() {
     const row = await this.db.query({
       query: 'for row in authors return row',

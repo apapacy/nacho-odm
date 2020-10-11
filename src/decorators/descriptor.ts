@@ -4,6 +4,7 @@ const meta = Symbol('nacho:desriptors');
 
 export class Descriptor {
     public property?: boolean;
+    public array?: boolean;
     public required = true;
     public type?: new (...args: any[]) => void;
     public groups?: string[];

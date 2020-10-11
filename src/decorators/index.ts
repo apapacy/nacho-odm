@@ -3,6 +3,7 @@ export * from './_type';
 export * from './enumerable';
 export * from './writable';
 export * from './property';
+export * from './array';
 export * from './optional';
 export * from './group';
 export * from './translatable';
