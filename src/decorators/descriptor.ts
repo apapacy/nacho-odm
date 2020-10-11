@@ -3,9 +3,10 @@ import 'reflect-metadata';
 const meta = Symbol('nacho:desriptors');
 
 export class Descriptor {
-    public attr?: boolean;
-    public array?: boolean;
+    public attr = false;
+    public array = false;
     public required = true;
+    public getter = false;
     public type?: new (...args: any[]) => void;
     public groups?: string[];
     public translatable = false;
@@ -33,6 +34,5 @@ export function getDescriptor(target: any, propertyKey: string | symbol): Descri
 }
 
 export function getDescriptors(target: any): any  {
-    console.log( Reflect.getMetadataKeys(target))
     return Reflect.getMetadata(meta, target);
 }

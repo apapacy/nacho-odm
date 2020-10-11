@@ -23,7 +23,7 @@ export class Reposytory {
 
   @model(Author)
   async authorCreate(author: Author): Promise<Author> {
-    console.log('000000000000000', author)
+    // console.log('000000000000000', author)
     const doc = await this.db.query({
       query: 'insert @author into authors let doc = NEW return doc',
       bindVars: { 'author': author }

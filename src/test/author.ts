@@ -1,5 +1,5 @@
 import {Model, ModelType} from '../model';
-import {optional, attr, array, group, _type, translatable} from '../decorators';
+import {optional, attr, array, getter, group, _type, translatable} from '../decorators';
 import {Translatable, TranslatableType} from '../translatable'
 interface AddressType extends ModelType {
     city: string,
@@ -55,7 +55,15 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     @group('dog')
     public address!: Address
 
-    @array(Address)
+    @attr()
+    @optional()
+    @getter()
+    public get addressId(): string {
+      return this.address.street.en;
+    }
+
+    @attr(Address)
+    @array()
     @group('dog')
     @optional()
     public addresses!: Array<Address>

@@ -4,6 +4,7 @@ export * from './enumerable';
 export * from './writable';
 export * from './attr';
 export * from './array';
+export * from './getter';
 export * from './optional';
 export * from './group';
 export * from './translatable';

@@ -40,12 +40,9 @@ export class Model<Type extends ModelType> implements ModelType {
               && descriptor.attr
               && !descriptor.array
               && typeof((data as any)[name]) === 'undefined') {
-                console.log('============================================', name, descriptor)
-                console.log(data)
-                console.log(name, (data as any)[name])
               throw new Error(`${this.constructor}[${name}] is requierd`);
           }
-          if (descriptor.attr)  {
+          if (descriptor.attr && !descriptor.getter)  {
               if (descriptor.type) {
                   if (descriptor.array) {
                     (this as any)[name] = new Array();
@@ -73,10 +70,7 @@ export class Model<Type extends ModelType> implements ModelType {
         const descriptors = getDescriptors(proto);
         const jsonObj: any = {};
         for (const name in descriptors) {
-            console.log(name);
-            console.log((this as any)[name]);
             const descriptor = descriptors[name] as Descriptor;
-            console.log(descriptor)
             if (descriptor.array) {
                 (this as any)[name].forEach((item: any) => {
                   if (typeof (item as any)[name] === 'object') {

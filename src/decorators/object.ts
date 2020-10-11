@@ -1,8 +1,7 @@
 import { setDescriptor } from './descriptor';
 
-export function array(Type?: Function) {
+export function object(Type?: Function) {
   return (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor): void => {
-      setDescriptor(target, propertyKey, 'array', true);
       if (Type) {
         setDescriptor(target, propertyKey, 'type', Type);
       }

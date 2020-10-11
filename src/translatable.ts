@@ -1,6 +1,3 @@
-import 'reflect-metadata';
-import { enumerable, property } from './decorators';
-
 export interface TranslatableType {
   en?: string,
   toJSON?: any
