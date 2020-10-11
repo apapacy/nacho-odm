@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 import 'reflect-metadata';
-import { optional, property, group, Descriptor, getDescriptors } from './decorators';
+import { optional, attr, group, Descriptor, getDescriptors } from './decorators';
 
 export interface ModelType {
     _type?: string,
@@ -11,22 +11,22 @@ export interface ModelType {
 
 export class Model<Type extends ModelType> implements ModelType {
 
-    @property()
+    @attr()
     @optional()
     @group('_all')
     public _type: string|undefined;
 
-    @property()
+    @attr()
     @optional()
     @group('_all')
     public _key: string|undefined;
 
-    @property()
+    @attr()
     @optional()
     @group('_all')
     public _id: string|undefined;
 
-    @property()
+    @attr()
     @optional()
     @group('_all')
     public _rev: string|undefined;
@@ -37,7 +37,7 @@ export class Model<Type extends ModelType> implements ModelType {
       for (const name in descriptors) {
           const descriptor = descriptors[name] as Descriptor;
           if (descriptor.required
-              && descriptor.property
+              && descriptor.attr
               && !descriptor.array
               && typeof((data as any)[name]) === 'undefined') {
                 console.log('============================================', name, descriptor)
@@ -45,7 +45,7 @@ export class Model<Type extends ModelType> implements ModelType {
                 console.log(name, (data as any)[name])
               throw new Error(`${this.constructor}[${name}] is requierd`);
           }
-          if (descriptor.property)  {
+          if (descriptor.attr)  {
               if (descriptor.type) {
                   if (descriptor.array) {
                     (this as any)[name] = new Array();
@@ -85,7 +85,7 @@ export class Model<Type extends ModelType> implements ModelType {
                       jsonObj[name] = (item as any)[name];
                   }
                 });
-            } else if (descriptor.property) {
+            } else if (descriptor.attr) {
                 if (typeof (this as any)[name] === 'object') {
                     jsonObj[name] = (this as any)[name].toJSON();
                 } else {

@@ -3,7 +3,7 @@ import 'reflect-metadata';
 const meta = Symbol('nacho:desriptors');
 
 export class Descriptor {
-    public property?: boolean;
+    public attr?: boolean;
     public array?: boolean;
     public required = true;
     public type?: new (...args: any[]) => void;

@@ -1,8 +1,8 @@
 import { setDescriptor } from './descriptor';
 
-export function property(Type?: Function) {
+export function attr(Type?: Function) {
   return (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor): void => {
-      setDescriptor(target, propertyKey, 'property', true);
+      setDescriptor(target, propertyKey, 'attr', true);
       if (Type) {
         setDescriptor(target, propertyKey, 'type', Type);
       }
