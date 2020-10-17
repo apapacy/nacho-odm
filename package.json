@@ -1,9 +1,10 @@
 {
   "name": "nacho-odm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "typescript couchdb odm",
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "readme.md"
   ],
   "main": "lib/index.js",
   "scripts": {
