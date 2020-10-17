@@ -102,10 +102,17 @@ export class Model<Type extends ModelType> implements ModelType {
             if (descriptor?.groups?.[0] === '_all'
                 || descriptor?.groups?.some(item => groups?.indexOf(item) > -1)) {
                 if (descriptor?.array) {
-                    jsonObj[name] = [...(this as any)[name]];
+                    if (descriptor.type) {
+                        jsonObj[name] = [];
+                        for (const item of (this as any)[name]) {
+                            jsonObj[name].push(item.get(groups, locale));
+                        }
+                    } else {
+                        jsonObj[name] = [...(this as any)[name]];
+                    }
                     continue;
                 }
-                if (typeof (this as any)[name] === 'object') {
+                if (descriptor?.type) {
                     if (descriptor.translatable) {
                         if (locale) {
                             jsonObj[name] = (this as any)[name][locale];
