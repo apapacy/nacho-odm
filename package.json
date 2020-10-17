@@ -1,6 +1,6 @@
 {
   "name": "nacho-odm",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "typescript couchdb odm",
   "files": [
     "lib/**/*"
@@ -14,10 +14,8 @@
     "lint": "tslint -p tsconfig.json"
   },
   "keywords": [
-    "couchdb",
     "typescript",
     "odm",
-    "nacho",
     "nacho-odm"
   ],
   "author": "apapacy@gmail.com",

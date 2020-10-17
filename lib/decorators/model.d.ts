@@ -1,1 +1,1 @@
-export declare function model(Type: any): (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor) => void;
+export declare function model(Type: new (...args: any[]) => void): (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor) => void;
