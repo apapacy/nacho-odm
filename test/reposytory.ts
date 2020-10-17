@@ -1,7 +1,7 @@
 import { Database } from 'arangojs';
 import { db } from './database';
 import { Author } from './author';
-import { model, collection } from '../decorators';
+import { model, collection } from '../src';
 
 
 export class Reposytory {

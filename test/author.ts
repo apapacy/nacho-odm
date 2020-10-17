@@ -1,6 +1,9 @@
-import {Model, ModelType} from '../model';
-import {optional, attr, array, getter, group, _type, translatable} from '../decorators';
-import {Translatable, TranslatableType} from '../translatable'
+import {Model, ModelType} from '../src';
+import {optional, attr, array, getter, group, _type, translatable} from '../src';
+import {Translatable, TranslatableType} from '../src';
+
+
+console.log('**************************', Model)
 interface AddressType extends ModelType {
     city: string,
     street: Translatable,

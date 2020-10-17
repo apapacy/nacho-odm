@@ -1,0 +1,1 @@
+export declare function group(...args: string[]): (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor | undefined) => void;
