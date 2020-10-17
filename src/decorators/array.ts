@@ -6,8 +6,5 @@ export function array(Type?: new(...args: any[]) => void) {
       if (Type) {
         setDescriptor(target, propertyKey, 'type', Type);
       }
-      if (descriptor) {
-          descriptor.enumerable = true;
-      }
     }
 }
