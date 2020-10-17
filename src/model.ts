@@ -45,17 +45,19 @@ export class Model<Type extends ModelType> implements ModelType {
           if (descriptor.attr && !descriptor.getter)  {
               if (descriptor.type) {
                   if (descriptor.array) {
-                    (this as any)[name] = new Array();
-                    if ((data as any)[name]) {
-                      (data as any)[name].forEach((item: any) => ((this as any)[name]).push(new (descriptor.type || Object)(item)));
-                    }
+                      (this as any)[name] = new Array();
+                      for (const item of (data as any)[name]) {
+                          (this as any)[name].push(new descriptor.type(item));
+                      }
                   } else {
                       (this as any)[name] = new descriptor.type((data as any)[name]);
                   }
               } else {
                   if (descriptor.array) {
                     (this as any)[name] = new Array();
-                    (data as any)[name].forEach((item: any) => (this as any)[name].push((data as any)[name]));
+                    for (const item of (data as any)[name]) {
+                        (this as any)[name].push(item);
+                    }
                   } else {
                       (this as any)[name] = (data as any)[name];
                   }
