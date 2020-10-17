@@ -1,6 +1,6 @@
 import { setDescriptor } from './descriptor';
 
-export function getter(Type?: Function) {
+export function getter(Type?:  new(...args: any[]) => void) {
   return (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor): void => {
       setDescriptor(target, propertyKey, 'getter', true);
       if (Type) {

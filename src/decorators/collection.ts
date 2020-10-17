@@ -3,9 +3,9 @@ export function collection(Constructor: any) {
       const originalValue = descriptor.value;
       descriptor.value = async function(...args: any[]) {
         const plainData = await originalValue.apply(this, args)
-        const collection = new Array();
-        plainData.forEach((item: any) => collection.push(new Constructor(item)));
-        return collection;
+        const data = new Array();
+        plainData.forEach((item: any) => data.push(new Constructor(item)));
+        return data;
       }
     }
 }

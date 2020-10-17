@@ -66,9 +66,9 @@ export class Author extends Model<AuthorType> implements AuthorType  {
     }
 
     @attr(Address)
-    @array()
+    @array(Address)
     @group('dog')
-    @optional()
+    @optional(Address)
     public addresses!: Array<Address>
 
 

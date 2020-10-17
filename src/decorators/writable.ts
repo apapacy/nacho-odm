@@ -1,5 +1,5 @@
 export function writable(value: boolean) {
-    return function(
+    return function writableFabrica(
       target: any,
       propertyKey: string,
       descriptor: PropertyDescriptor

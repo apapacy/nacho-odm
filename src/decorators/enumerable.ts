@@ -1,5 +1,5 @@
 export function enumerable(value: boolean) {
-    return function (
+    return function enumerableFabrica (
       target: any,
       propertyKey: string,
       descriptor: PropertyDescriptor

@@ -34,7 +34,7 @@ export class Model<Type extends ModelType> implements ModelType {
     constructor(data: Type) {
       const proto = Object.getPrototypeOf(this);
       const descriptors = getDescriptors(proto);
-      for (const name in descriptors) {
+      for (const name of Object.keys(descriptors)) {
           const descriptor = descriptors[name] as Descriptor;
           if (descriptor.required
               && descriptor.attr
@@ -69,7 +69,7 @@ export class Model<Type extends ModelType> implements ModelType {
         const proto = Object.getPrototypeOf(this);
         const descriptors = getDescriptors(proto);
         const jsonObj: any = {};
-        for (const name in descriptors) {
+        for (const name of Object.keys(descriptors)) {
             const descriptor = descriptors[name] as Descriptor;
             if (descriptor.attr && descriptor.array) {
                 jsonObj[name] = [];
@@ -95,7 +95,7 @@ export class Model<Type extends ModelType> implements ModelType {
         const proto = Object.getPrototypeOf(this);
         const descriptors = getDescriptors(proto);
         const jsonObj: any = {};
-        for (const name in descriptors) {
+        for (const name of Object.keys(descriptors)) {
             const descriptor = descriptors[name] as Descriptor;
             if (descriptor?.groups?.[0] === '_all'
                 || descriptor?.groups?.some(item => groups?.indexOf(item) > -1)) {
