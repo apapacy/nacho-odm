@@ -1,6 +1,6 @@
 {
   "name": "nacho-odm",
-  "version": "0.0.2",
+  "version": "1.0.2",
   "description": "typescript couchdb odm",
   "files": [
     "lib/**/*"
@@ -21,10 +21,10 @@
   "author": "apapacy@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "arangojs": "^7.0.2",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "arangojs": "^7.0.2",
     "@types/jest": "^25.1.2",
     "jest": "^25.1.0",
     "prettier": "^1.19.1",
