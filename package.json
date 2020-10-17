@@ -1,7 +1,8 @@
 {
   "name": "nacho-odm",
-  "version": "1.0.3",
-  "description": "typescript couchdb odm",
+  "version": "1.0.4",
+  "description": "typescript arangojs odm",
+  "repository": "https://github.com/apapacy/nacho-odm",
   "files": [
     "lib/**/*",
     "readme.md"
