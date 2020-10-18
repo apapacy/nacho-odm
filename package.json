@@ -1,6 +1,6 @@
 {
   "name": "nacho-odm",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "typescript arangojs odm",
   "repository": "https://github.com/apapacy/nacho-odm",
   "files": [
