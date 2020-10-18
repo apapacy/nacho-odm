@@ -6,7 +6,8 @@ export interface ModelType {
     _type?: string,
     _key?: string,
     _id?: string,
-    _rev?: string
+    _rev?: string,
+    toJSON(): any
 }
 
 export class Model<Type extends ModelType> implements ModelType {
@@ -31,7 +32,7 @@ export class Model<Type extends ModelType> implements ModelType {
     @group('_all')
     public _rev: string|undefined;
 
-    constructor(data: Type) {
+    constructor(data: any) {
       const proto = Object.getPrototypeOf(this);
       const descriptors = getDescriptors(proto);
       for (const name of Object.keys(descriptors)) {
@@ -46,26 +47,25 @@ export class Model<Type extends ModelType> implements ModelType {
               if (descriptor.type) {
                   if (descriptor.array) {
                       (this as any)[name] = new Array();
-                      for (const item of (data as any)[name]) {
+                      for (const item of data[name]) {
                           (this as any)[name].push(new descriptor.type(item));
                       }
                   } else {
-                      (this as any)[name] = new descriptor.type((data as any)[name]);
+                      (this as any)[name] = new descriptor.type(data[name]);
                   }
               } else {
                   if (descriptor.array) {
                     (this as any)[name] = new Array();
-                    for (const item of (data as any)[name]) {
+                    for (const item of data[name]) {
                         (this as any)[name].push(item);
                     }
                   } else {
-                      (this as any)[name] = (data as any)[name];
+                      (this as any)[name] = data[name];
                   }
               }
           }
       }
     };
-
 
     public toJSON(): any {
         const proto = Object.getPrototypeOf(this);
@@ -93,7 +93,7 @@ export class Model<Type extends ModelType> implements ModelType {
         return jsonObj;
     }
 
-    public get(groups: string[], locale?: string) {
+    public get(groups: string[], locale?: string): Type {
         const proto = Object.getPrototypeOf(this);
         const descriptors = getDescriptors(proto);
         const jsonObj: any = {};

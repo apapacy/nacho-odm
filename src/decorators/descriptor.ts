@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 const meta = Symbol('nacho:desriptors');
 
 export class Descriptor {

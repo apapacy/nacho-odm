@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 export declare class Descriptor {
     attr: boolean;
     array: boolean;

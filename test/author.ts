@@ -2,8 +2,6 @@ import {Model, ModelType} from '../src';
 import {optional, attr, array, getter, group, _type, translatable} from '../src';
 import {Translatable, TranslatableType} from '../src';
 
-
-console.log('**************************', Model)
 interface AddressType extends ModelType {
     city: string,
     street: Translatable,
