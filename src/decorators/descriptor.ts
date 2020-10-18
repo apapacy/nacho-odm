@@ -5,7 +5,7 @@ export class Descriptor {
     public array = false;
     public required = true;
     public getter = false;
-    public type?: new (...args: any[]) => void;
+    public constr?: new(...args: any[]) => void;
     public groups?: string[];
     public translatable = false;
 }

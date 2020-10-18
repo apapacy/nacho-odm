@@ -20,7 +20,7 @@ export class Address extends Model<AddressType> implements AddressType {
     public city!: string;
     @attr()
     @group('cat')
-    @translatable()
+    @translatable(Translatable)
     public street!: Translatable;
     @attr()
     @group('cat')
@@ -42,7 +42,7 @@ export class Author extends Model<AuthorType> implements AuthorType  {
         return this.name + '***'
     };
 
-    @translatable()
+    @translatable(Translatable)
     @group('dog', 'cat')
     public get Name1(): TranslatableType {
         return {

@@ -40,18 +40,18 @@ export class Model<Type extends ModelType> implements ModelType {
           if (descriptor.required
               && descriptor.attr
               && !descriptor.array
-              && typeof((data as any)[name]) === 'undefined') {
+              && typeof(data[name]) === 'undefined') {
               throw new Error(`${this.constructor}[${name}] is requierd`);
           }
           if (descriptor.attr && !descriptor.getter)  {
-              if (descriptor.type) {
+              if (descriptor.constr) {
                   if (descriptor.array) {
                       (this as any)[name] = new Array();
                       for (const item of data[name]) {
-                          (this as any)[name].push(new descriptor.type(item));
+                          (this as any)[name].push(new descriptor.constr(item));
                       }
                   } else {
-                      (this as any)[name] = new descriptor.type(data[name]);
+                      (this as any)[name] = new descriptor.constr(data[name]);
                   }
               } else {
                   if (descriptor.array) {
@@ -102,7 +102,7 @@ export class Model<Type extends ModelType> implements ModelType {
             if (descriptor?.groups?.[0] === '_all'
                 || descriptor?.groups?.some(item => groups?.indexOf(item) > -1)) {
                 if (descriptor?.array) {
-                    if (descriptor.type) {
+                    if (descriptor.constr) {
                         jsonObj[name] = [];
                         for (const item of (this as any)[name]) {
                             jsonObj[name].push(item.get(groups, locale));
@@ -112,7 +112,7 @@ export class Model<Type extends ModelType> implements ModelType {
                     }
                     continue;
                 }
-                if (descriptor?.type) {
+                if (descriptor?.constr) {
                     if (descriptor.translatable) {
                         if (locale) {
                             jsonObj[name] = (this as any)[name][locale];

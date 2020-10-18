@@ -1,4 +1,4 @@
-export function collection(Constructor: any) {
+export function collection(Constructor: new(...args: any[]) => void) {
   return (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor): void => {
       const originalValue = descriptor.value;
       descriptor.value = async function(...args: any[]) {
