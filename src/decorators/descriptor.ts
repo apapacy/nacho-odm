@@ -5,7 +5,7 @@ export class Descriptor {
     public array = false;
     public required = true;
     public getter = false;
-    public constr?: new(...args: any[]) => void;
+    public constr?: new (...args: any[]) => void;
     public groups?: string[];
     public translatable = false;
 }
@@ -24,13 +24,13 @@ export function setDescriptor(target: any, propertyKey: string | symbol, key: st
         descriptors[propertyKey] = new Descriptor();
     }
     descriptors[propertyKey][key] = value;
-    Reflect.defineMetadata(meta, descriptors, target)
+    Reflect.defineMetadata(meta, descriptors, target);
 }
 
-export function getDescriptor(target: any, propertyKey: string | symbol): Descriptor  {
+export function getDescriptor(target: any, propertyKey: string | symbol): Descriptor {
     return Reflect.getMetadata(meta, target)[propertyKey];
 }
 
-export function getDescriptors(target: any): any  {
+export function getDescriptors(target: any): any {
     return Reflect.getMetadata(meta, target);
 }

@@ -1,10 +1,9 @@
 export interface TranslatableType {
-  en?: string,
-  toJSON?: any
+    en?: string;
+    toJSON?: any;
 }
 
-export class Translatable implements TranslatableType{
-
+export class Translatable implements TranslatableType {
     public en!: string;
 
     constructor(translations: TranslatableType) {

@@ -1,7 +1,7 @@
 import { Database } from 'arangojs';
 
 export const db = new Database({
-  url: 'http://localhost:8000',
-  databaseName: 'test',
-  auth: { username: 'root', password: '' },
+    url: 'http://localhost:8001',
+    databaseName: 'test',
+    auth: { username: 'root', password: '' },
 });
