@@ -1,5 +1,5 @@
 import { Model, ModelType } from '../src';
-import { optional, attr, array, getter, group, _type, translatable } from '../src';
+import { optional, persistent, array, getter, group, _type, translatable } from '../src';
 import { Translatable, TranslatableType } from '../src';
 
 interface AddressType extends ModelType {
@@ -17,14 +17,14 @@ interface AuthorType extends ModelType {
 @_type('address')
 export class Address extends Model<AddressType> implements AddressType {
     public city!: string;
-    @attr()
+    @persistent()
     @group('cat')
     @translatable(Translatable)
     public street!: Translatable;
-    @attr()
+    @persistent()
     @group('cat')
     public house!: string;
-    @attr()
+    @persistent()
     @optional()
     @group('cat')
     public appartment?: number;
@@ -32,7 +32,7 @@ export class Address extends Model<AddressType> implements AddressType {
 
 @_type('author')
 export class Author extends Model<AuthorType> implements AuthorType {
-    @attr()
+    @persistent()
     public name!: string;
 
     public get Name(): string {
@@ -49,18 +49,18 @@ export class Author extends Model<AuthorType> implements AuthorType {
         } as TranslatableType;
     }
 
-    @attr(Address)
+    @persistent(Address)
     @group('dog')
     public address!: Address;
 
-    @attr()
+    @persistent()
     @optional()
     @getter()
     public get addressId(): string | undefined {
         return this.address._key;
     }
 
-    @attr(Address)
+    @persistent(Address)
     @array(Address)
     @group('dog')
     @optional(Address)

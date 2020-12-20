@@ -1,6 +1,5 @@
-import * as ts from 'typescript';
 import 'reflect-metadata';
-import { optional, attr, group, Descriptor, getDescriptors } from './decorators';
+import { optional, persistent, group, Descriptor, getDescriptors } from './decorators';
 
 export interface ModelType {
     _type?: string;
@@ -11,22 +10,22 @@ export interface ModelType {
 }
 
 export class Model<Type extends ModelType> implements ModelType {
-    @attr()
+    @persistent()
     @optional()
     @group('_all')
     public _type: string | undefined;
 
-    @attr()
+    @persistent()
     @optional()
     @group('_all')
     public _key: string | undefined;
 
-    @attr()
+    @persistent()
     @optional()
     @group('_all')
     public _id: string | undefined;
 
-    @attr()
+    @persistent()
     @optional()
     @group('_all')
     public _rev: string | undefined;

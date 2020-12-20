@@ -2,7 +2,7 @@ import { setDescriptor } from './descriptor';
 import { Translatable } from '../translatable';
 
 export function translatable(Constructor?: new (...args: any[]) => void) {
-    return (target: any, propertyKey: string | symbol, descriptor?: PropertyDescriptor): void => {
+    return (target: any, propertyKey: string | symbol): void => {
         if (!(Constructor instanceof Translatable.constructor)) {
             throw new Error(`${Constructor} not instanceof ${Translatable}`);
         }
